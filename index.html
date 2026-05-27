@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.5">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="zh-HK" class="scroll-smooth"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;DJI 旗艦無人機對比 - 突破邊界，定義未來&lt;/title&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"&gt;&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>tailwind.config = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>darkMode: 'class',</p>
+<p class="p1"><span class="Apple-converted-space">            </span>theme: {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>extend: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>colors: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>dark: '#050505',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>panel: '#121212',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>brand: '#f5f5f7',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>accent: '#2997ff',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>transitionTimingFunction: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'spring': 'cubic-bezier(0.34, 1.56, 0.64, 1)',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>'smooth': 'cubic-bezier(0.25, 1, 0.5, 1)',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 基礎設定與字體 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #050505;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #f5f5f7;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-font-smoothing: antialiased;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow-x: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 隱藏原生滾動條，保持頁面極簡感 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-track {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #050505;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-thumb {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #333;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-thumb:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #555;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Glassmorphism 毛玻璃特效 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.glass {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(18, 18, 18, 0.65);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(24px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-backdrop-filter: blur(24px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid rgba(255, 255, 255, 0.08);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Border Glow 旗艦發光邊框特效 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.glow-border {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.glow-border::after {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>content: '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>inset: -1px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: inherit;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05), transparent);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: -1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.glow-border:hover::after {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 1;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Sticky 表頭與首列陰影過渡 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sticky-col {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: sticky;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(5, 5, 5, 0.95);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 40;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 10px 0 15px -5px rgba(0,0,0,0.5);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 硬件加速與初始狀態 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hardware-accel {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translate3d(0, 0, 0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>backface-visibility: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.observe-item {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(30px) translate3d(0,0,0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.observe-item.in-view {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(0) translate3d(0,0,0);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 動態表格列 - 詳細規格 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.detail-row {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* 無人機光影背景 */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hero-bg {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: radial-gradient(circle at 50% -20%, #1a1a24 0%, #050505 60%);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="antialiased selection:bg-accent selection:text-white"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;header class="relative w-full h-[50vh] flex flex-col items-center justify-center hero-bg overflow-hidden hardware-accel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-50 mask-image:linear-gradient(to_bottom,white,transparent)"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1 id="hero-title" class="text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-4 z-10"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>選擇你的旗艦</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p id="hero-subtitle" class="text-lg md:text-xl text-gray-400 font-medium z-10"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>6 款次世代航拍機，重塑視覺邊界。</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex justify-end observe-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="toggle-view-btn" class="glow-border bg-panel text-sm font-semibold px-6 py-3 rounded-full border border-white/10 hover:bg-white/10 transition-all duration-300 ease-spring hover:scale-105 active:scale-95 flex items-center gap-2 hardware-accel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"&gt;&lt;/path&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span id="toggle-text"&gt;展開完整規格&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main class="max-w-[1400px] mx-auto px-4 pb-32"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="relative overflow-x-auto shadow-2xl rounded-2xl border border-white/5 bg-[#0a0a0a]/50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="min-w-[1100px] flex flex-col" id="compare-table"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex sticky top-0 z-50 glass pt-8 pb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="w-48 flex-shrink-0 sticky-col border-b border-white/10"&gt;&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center border-b border-white/10 pb-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col items-center group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-20 h-20 mb-4 text-gray-300 group-hover:scale-110 group-hover:text-white transition-all duration-500 ease-spring hardware-accel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;svg viewBox="0 0 100 100" fill="currentColor"&gt;&lt;path d="M50 20C45 20 40 25 40 30V70C40 75 45 80 50 80C55 80 60 75 60 70V30C60 25 55 20 50 20ZM50 30C52 30 53 32 53 35C53 38 52 40 50 40C48 40 47 38 47 35C47 32 48 30 50 30ZM20 20L40 35M80 20L60 35M20 80L40 65M80 80L60 65" stroke="currentColor" stroke-width="4" stroke-linecap="round"/&gt;&lt;circle cx="20" cy="20" r="10" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;circle cx="80" cy="20" r="10" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;circle cx="20" cy="80" r="10" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;circle cx="80" cy="80" r="10" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-orange-400 font-bold tracking-widest mb-1"&gt;旗艦雙瞳&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-500"&gt;Mavic 4 Pro&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col items-center group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-20 h-20 mb-4 text-gray-400 group-hover:scale-110 group-hover:text-white transition-all duration-500 ease-spring hardware-accel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;svg viewBox="0 0 100 100" fill="currentColor"&gt;&lt;path d="M50 25C46 25 42 29 42 35V65C42 71 46 75 50 75C54 75 58 71 58 65V35C58 29 54 25 50 25ZM25 25L42 38M75 25L58 38M25 75L42 62M75 75L58 62" stroke="currentColor" stroke-width="4" stroke-linecap="round"/&gt;&lt;circle cx="25" cy="25" r="8" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;circle cx="75" cy="25" r="8" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;circle cx="25" cy="75" r="8" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;circle cx="75" cy="75" r="8" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-blue-400 font-bold tracking-widest mb-1"&gt;輕旗艦&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-lg font-bold"&gt;Air 3S&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col items-center group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-20 h-20 mb-4 text-gray-400 group-hover:scale-110 group-hover:text-white transition-all duration-500 ease-spring hardware-accel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;svg viewBox="0 0 100 100" fill="currentColor"&gt;&lt;path d="M50 30C47 30 44 33 44 38V62C44 67 47 70 50 70C53 70 56 67 56 62V38C56 33 53 30 50 30ZM30 30L44 40M70 30L56 40M30 70L44 60M70 70L56 60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/&gt;&lt;circle cx="30" cy="30" r="7" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="70" cy="30" r="7" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="30" cy="70" r="7" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="70" cy="70" r="7" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-green-400 font-bold tracking-widest mb-1"&gt;全能迷你&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-lg font-bold"&gt;Mini 5 Pro&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col items-center group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-20 h-20 mb-4 text-gray-400 group-hover:scale-110 group-hover:text-white transition-all duration-500 ease-spring hardware-accel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;svg viewBox="0 0 100 100" fill="currentColor"&gt;&lt;rect x="35" y="35" width="30" height="30" rx="8" stroke="currentColor" stroke-width="4" fill="none"/&gt;&lt;path d="M25 25L40 40M75 25L60 40M25 75L40 60M75 75L60 60" stroke="currentColor" stroke-width="4" stroke-linecap="round"/&gt;&lt;circle cx="25" cy="25" r="9" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="75" cy="25" r="9" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="25" cy="75" r="9" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="75" cy="75" r="9" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-purple-400 font-bold tracking-widest mb-1"&gt;潮流生活&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-lg font-bold"&gt;Lito X1&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col items-center group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-20 h-20 mb-4 text-gray-400 group-hover:scale-110 group-hover:text-white transition-all duration-500 ease-spring hardware-accel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;svg viewBox="0 0 100 100" fill="currentColor"&gt;&lt;path d="M50 40C46 40 42 44 42 50C42 56 46 60 50 60C54 60 58 56 58 50C58 44 54 40 50 40Z" fill="currentColor"/&gt;&lt;circle cx="35" cy="35" r="15" stroke="currentColor" stroke-width="4" fill="none"/&gt;&lt;circle cx="65" cy="35" r="15" stroke="currentColor" stroke-width="4" fill="none"/&gt;&lt;circle cx="35" cy="65" r="15" stroke="currentColor" stroke-width="4" fill="none"/&gt;&lt;circle cx="65" cy="65" r="15" stroke="currentColor" stroke-width="4" fill="none"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-red-400 font-bold tracking-widest mb-1"&gt;沉浸 FPV&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-lg font-bold"&gt;Avata 360&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col items-center group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-20 h-20 mb-4 text-gray-400 group-hover:scale-110 group-hover:text-white transition-all duration-500 ease-spring hardware-accel"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;svg viewBox="0 0 100 100" fill="currentColor"&gt;&lt;rect x="42" y="30" width="16" height="40" rx="8" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;path d="M35 30L45 40M65 30L55 40M35 70L45 60M65 70L55 60" stroke="currentColor" stroke-width="2" stroke-linecap="round"/&gt;&lt;circle cx="35" cy="30" r="6" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="65" cy="30" r="6" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="35" cy="70" r="6" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="65" cy="70" r="6" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;/svg&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-yellow-400 font-bold tracking-widest mb-1"&gt;掌上 Vlog&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-lg font-bold"&gt;Neo 2&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex flex-col" id="table-body"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex border-b border-white/5 hover:bg-white/[0.03] transition-colors duration-300 stagger-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>起飛重量</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-lg font-bold"&gt;898g&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-lg font-bold"&gt;724g&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-lg font-bold text-green-400"&gt;&amp;lt;249g&lt;/span&gt;&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs text-gray-500"&gt;免註冊優勢&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-lg font-bold"&gt;450g&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-lg font-bold"&gt;410g&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-lg font-bold text-yellow-400"&gt;135g&lt;/span&gt;&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs text-gray-500"&gt;極致輕量&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex border-b border-white/5 hover:bg-white/[0.03] transition-colors duration-300 stagger-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>感光元件 (Sensor)</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="font-bold"&gt;1吋 CMOS&lt;/span&gt;&lt;br&gt;&lt;span class="text-xs text-gray-400"&gt;哈蘇三鏡頭系統&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="font-bold"&gt;1吋 + 1/1.3吋&lt;/span&gt;&lt;br&gt;&lt;span class="text-xs text-gray-400"&gt;雙鏡頭系統&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="font-bold"&gt;1/1.3吋 CMOS&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="font-bold"&gt;1吋 CMOS&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="font-bold"&gt;1/1.3吋 CMOS&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="font-bold"&gt;1/2吋 CMOS&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex border-b border-white/5 hover:bg-white/[0.03] transition-colors duration-300 stagger-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>最高拍攝畫質</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-xl font-bold text-white"&gt;8K/60fps&lt;/span&gt;&lt;br&gt;&lt;span class="text-xs text-gray-400"&gt;Apple ProRes&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-xl font-bold text-white"&gt;4K/120fps&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-xl font-bold text-white"&gt;4K/120fps&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-xl font-bold text-white"&gt;6K/30fps&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-xl font-bold text-white"&gt;4K/120fps&lt;/span&gt;&lt;br&gt;&lt;span class="text-xs text-gray-400"&gt;HDR 支援&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-xl font-bold text-white"&gt;4K/60fps&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex border-b border-white/5 hover:bg-white/[0.03] transition-colors duration-300 stagger-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>避障系統</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-6 text-sm font-medium"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-orange-300"&gt;全向視覺 + LiDAR 激光雷達&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;全向視覺避障&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;全向視覺避障&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;3D ToF 深度感測&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;下向 + 後向視覺&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;單目視覺 + AI 檢測&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex border-b border-white/5 hover:bg-white/[0.03] transition-colors duration-300 stagger-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>社交媒體原生直拍</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-6 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-gray-500"&gt;— &lt;br&gt;&lt;span class="text-xs"&gt;(僅支援無損裁切)&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-gray-500"&gt;2.7K 垂直裁切&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-green-400 font-bold"&gt;支援 (雲台旋轉)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-green-400 font-bold"&gt;支援 (雲台旋轉)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-gray-500"&gt;—&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-green-400 font-bold"&gt;原生支援&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="detail-row flex border-b border-white/5 bg-panel/30 hover:bg-white/[0.03] transition-colors duration-300 h-0" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>圖傳系統</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-0 detail-content text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold text-accent"&gt;O4 Pro (20km)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold"&gt;O4 (20km)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold"&gt;O4 Mini (15km)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold"&gt;O4 (15km)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold"&gt;O4+ (15km)&lt;br&gt;&lt;span class="text-xs text-gray-500"&gt;低延遲 FPV&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold"&gt;O4 Lite (10km)&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="detail-row flex border-b border-white/5 bg-panel/30 hover:bg-white/[0.03] transition-colors duration-300 h-0" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>色彩模式</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-0 detail-content text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;10-bit D-Log M&lt;br&gt;&lt;span class="text-xs text-gray-500"&gt;HLG 支援&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;10-bit D-Log M&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;10-bit D-Log M&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;10-bit D-Log M&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;10-bit D-Log M&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-gray-500"&gt;8-bit 標準&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="detail-row flex border-b border-white/5 bg-panel/30 hover:bg-white/[0.03] transition-colors duration-300 h-0" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>影片最高碼率</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-0 detail-content text-sm font-mono"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;200 Mbps&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;150 Mbps&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;130 Mbps&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;150 Mbps&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;150 Mbps&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;100 Mbps&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="detail-row flex border-b border-transparent bg-panel/30 hover:bg-white/[0.03] transition-colors duration-300 h-0" style="display: none;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>特色智能功能</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-0 detail-content text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold text-white"&gt;AI 全向軌跡跟隨 3.0&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;進階智能跟隨&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;全向語音操控&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;AI 導演運鏡模式&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;沉浸式體感/頭部追蹤&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;掌上起降 / 零門檻跟拍&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;footer class="border-t border-white/10 py-12 text-center text-gray-500 text-sm observe-item"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Copyright © 2026 DJI HK. All Rights Reserved. (Concept Design strictly for Demonstration)&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.addEventListener("DOMContentLoaded", () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// 註冊 GSAP ScrollTrigger</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gsap.registerPlugin(ScrollTrigger);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// 1. Intersection Observer - 元素視圖載入動畫</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const observerOptions = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>root: null,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>rootMargin: '0px',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>threshold: 0.15</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const observer = new IntersectionObserver((entries, obs) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>entries.forEach(entry =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (entry.isIntersecting) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>entry.target.classList.add('in-view');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>obs.unobserve(entry.target);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, observerOptions);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.observe-item').forEach(el =&gt; observer.observe(el));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// 2. Hero 區塊進場動畫 (Stagger 文字)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gsap.fromTo("#hero-title",<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ opacity: 0, y: 50 },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gsap.fromTo("#hero-subtitle",<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ opacity: 0, y: 30 },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.4 }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// 3. 表格行滾動交錯動畫 (Stagger Animation)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gsap.fromTo(".stagger-row",</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{ opacity: 0, y: 30 },</p>
+<p class="p1"><span class="Apple-converted-space">                </span>{</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>scrollTrigger: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>trigger: "#compare-table",</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>start: "top 85%",</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>opacity: 1,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>y: 0,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>duration: 0.8,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>stagger: 0.08,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>ease: "power3.out"</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// 4. 類 FLIP 邏輯 - 展開/折疊詳細規格 (極致平滑)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const toggleBtn = document.getElementById('toggle-view-btn');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const toggleText = document.getElementById('toggle-text');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const detailRows = document.querySelectorAll('.detail-row');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const detailContents = document.querySelectorAll('.detail-content');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let isDetailed = false;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>toggleBtn.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>isDetailed = !isDetailed;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>toggleText.textContent = isDetailed ? "顯示簡易對比" : "展開完整規格";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (isDetailed) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// 展開邏輯</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>detailRows.forEach((row, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>row.style.display = 'flex'; // 先給予 display 以計算高度</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// GSAP 高度與透明度平滑過渡</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>gsap.to(row, {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>height: "auto",</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>opacity: 1,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>duration: 0.6,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>ease: "expo.out",</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>delay: index * 0.05 // 產生細膩的交錯感</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// 內部 padding 展開</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>gsap.to(row.querySelector('.detail-content'), {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>paddingTop: "1.5rem",</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>paddingBottom: "1.5rem",</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>duration: 0.6,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>ease: "expo.out",</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>delay: index * 0.05</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// 折疊邏輯</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>detailRows.forEach((row, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>gsap.to(row, {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>height: 0,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>opacity: 0,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>duration: 0.5,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>ease: "power3.inOut",</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>onComplete: () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>row.style.display = 'none'; // 動畫結束後隱藏</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>gsap.to(row.querySelector('.detail-content'), {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>paddingTop: "0",</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>paddingBottom: "0",</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>duration: 0.5,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>ease: "power3.inOut"</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
