@@ -1,465 +1,1165 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.5">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DJI 無人機 2026 旗艦對比 · 香港</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+TC:wght@300;400;500;700;900&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['"Bebas Neue"', 'cursive'],
+          sans: ['"Noto Sans TC"', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'monospace'],
+        },
+        colors: {
+          bg: '#060a12',
+          surface: '#0b1120',
+          glass: 'rgba(255,255,255,0.04)',
+          cyan: { DEFAULT: '#00d4ff', dim: '#00a8cc' },
+          gold: '#f5c842',
+          ember: '#ff5c1a',
+          violet: '#9b6dff',
+          mint: '#3dffa0',
+        },
+        backdropBlur: { xl: '24px' },
+      }
+    }
+  }
+</script>
+
+<!-- GSAP + ScrollTrigger + Flip -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+
+<style>
+  /* ─── BASE ─── */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #060a12;
+    color: #e8f4ff;
+    font-family: 'Noto Sans TC', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #060a12; }
+  ::-webkit-scrollbar-thumb { background: #00d4ff44; border-radius: 2px; }
+
+  /* ─── NOISE TEXTURE ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── GRID OVERLAY ─── */
+  .grid-overlay {
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
+    background-size: 80px 80px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ─── GLASS CARD ─── */
+  .glass {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .glass-strong {
+    background: rgba(11,17,32,0.85);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    border: 1px solid rgba(0,212,255,0.12);
+  }
+
+  /* ─── GLOW BORDERS ─── */
+  .glow-cyan { box-shadow: 0 0 20px rgba(0,212,255,0.15), inset 0 0 20px rgba(0,212,255,0.03); }
+  .glow-gold { box-shadow: 0 0 20px rgba(245,200,66,0.15), inset 0 0 20px rgba(245,200,66,0.03); }
+  .glow-ember { box-shadow: 0 0 20px rgba(255,92,26,0.2), inset 0 0 20px rgba(255,92,26,0.05); }
+  .glow-violet { box-shadow: 0 0 20px rgba(155,109,255,0.15), inset 0 0 20px rgba(155,109,255,0.03); }
+  .glow-mint { box-shadow: 0 0 20px rgba(61,255,160,0.15), inset 0 0 20px rgba(61,255,160,0.03); }
+
+  /* ─── HERO ─── */
+  .hero-gradient {
+    background: radial-gradient(ellipse 120% 80% at 50% 0%, rgba(0,212,255,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 20% 100%, rgba(155,109,255,0.06) 0%, transparent 50%),
+                #060a12;
+  }
+
+  /* ─── DRONE IMAGE CONTAINER ─── */
+  .drone-img-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 220px;
+    overflow: hidden;
+  }
+  .drone-img-wrap img {
+    max-height: 180px;
+    max-width: 90%;
+    object-fit: contain;
+    filter: drop-shadow(0 12px 40px rgba(0,212,255,0.25));
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
+    will-change: transform;
+    transform: translate3d(0,0,0);
+  }
+  .drone-card:hover .drone-img-wrap img {
+    transform: translate3d(0,-8px,0) scale(1.04);
+    filter: drop-shadow(0 20px 60px rgba(0,212,255,0.35));
+  }
+  .drone-img-glow {
+    position: absolute;
+    bottom: -20px;
+    left: 50%; transform: translateX(-50%);
+    width: 140px; height: 40px;
+    border-radius: 50%;
+    filter: blur(20px);
+    opacity: 0.5;
+  }
+
+  /* ─── DRONE CARD ─── */
+  .drone-card {
+    border-radius: 20px;
+    transition: transform 0.4s cubic-bezier(0.25,1,0.5,1), box-shadow 0.4s ease;
+    will-change: transform;
+    transform: translate3d(0,0,0);
+    position: relative;
+    overflow: hidden;
+  }
+  .drone-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .drone-card:hover {
+    transform: translate3d(0,-6px,0);
+  }
+  .drone-card.flagship {
+    border-color: rgba(255,92,26,0.3) !important;
+  }
+
+  /* ─── STICKY COMPARE HEADER ─── */
+  #sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transform: translate3d(0,0,0);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    background: rgba(6,10,18,0.92);
+    border-bottom: 1px solid rgba(0,212,255,0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  #sticky-header.scrolled {
+    box-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  }
+  .sticky-drone-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 8px;
+  }
+  .sticky-drone-col img {
+    height: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0,212,255,0.3));
+    transition: transform 0.3s cubic-bezier(0.25,1,0.5,1);
+  }
+  .sticky-drone-col:hover img { transform: translateY(-3px) scale(1.05); }
+  .sticky-drone-name {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .sticky-drone-price {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    opacity: 0.6;
+    text-align: center;
+  }
+
+  /* ─── SPEC TABLE ─── */
+  .spec-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+  .spec-table thead th {
+    padding: 0;
+    font-weight: normal;
+    border: none;
+  }
+  .spec-table tbody tr {
+    transition: background 0.2s ease;
+  }
+  .spec-table tbody tr:hover td {
+    background: rgba(0,212,255,0.03);
+  }
+  .spec-group-row td {
+    background: rgba(0,212,255,0.04) !important;
+    padding: 10px 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: #00d4ff;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(0,212,255,0.1);
+  }
+  .spec-label-col {
+    padding: 14px 20px;
+    font-size: 13px;
+    color: rgba(232,244,255,0.65);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    white-space: nowrap;
+    width: 180px;
+  }
+  .spec-val-col {
+    padding: 14px 12px;
+    font-size: 13px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: color 0.2s ease;
+    vertical-align: middle;
+  }
+  .spec-val-col.best { color: #00d4ff; font-weight: 600; }
+  .spec-val-col.good { color: #f5c842; }
+  .spec-val-col.check { color: #3dffa0; }
+  .spec-val-col.cross { color: rgba(255,255,255,0.2); }
+  .spec-val-col.flagship-col { color: #ff5c1a; }
+
+  /* ─── PROGRESS BAR ─── */
+  .bar-wrap { height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 2px; width: 0; transition: width 1.2s cubic-bezier(0.23,1,0.32,1); }
+
+  /* ─── BADGE ─── */
+  .badge {
+    display: inline-flex; align-items: center;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+  }
+  .badge-cyan { background: rgba(0,212,255,0.12); color: #00d4ff; border: 1px solid rgba(0,212,255,0.25); }
+  .badge-gold { background: rgba(245,200,66,0.12); color: #f5c842; border: 1px solid rgba(245,200,66,0.25); }
+  .badge-ember { background: rgba(255,92,26,0.15); color: #ff5c1a; border: 1px solid rgba(255,92,26,0.3); }
+  .badge-violet { background: rgba(155,109,255,0.12); color: #9b6dff; border: 1px solid rgba(155,109,255,0.25); }
+  .badge-mint { background: rgba(61,255,160,0.1); color: #3dffa0; border: 1px solid rgba(61,255,160,0.2); }
+  .badge-new { background: linear-gradient(90deg,rgba(61,255,160,0.15),rgba(0,212,255,0.1)); color: #3dffa0; border: 1px solid rgba(61,255,160,0.3); animation: newPulse 2s ease-in-out infinite; }
+  @keyframes newPulse { 0%,100%{opacity:1} 50%{opacity:0.65} }
+
+  /* ─── SCORE RING ─── */
+  .score-ring-wrap { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+  .score-ring-wrap svg { transform: rotate(-90deg); }
+  .score-ring-bg { fill: none; stroke: rgba(255,255,255,0.06); }
+  .score-ring-fill { fill: none; stroke-linecap: round; transition: stroke-dashoffset 1.4s cubic-bezier(0.23,1,0.32,1); }
+  .score-ring-text { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 500; }
+
+  /* ─── CTA BUTTON ─── */
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.25s cubic-bezier(0.25,1,0.5,1), box-shadow 0.25s ease, background 0.2s ease;
+    will-change: transform;
+    transform: translate3d(0,0,0);
+  }
+  .cta-btn:hover { transform: translate3d(0,-2px,0); }
+  .cta-btn:active { transform: translate3d(0,1px,0); }
+  .cta-primary {
+    background: linear-gradient(135deg, #00d4ff, #0099cc);
+    color: #000;
+    box-shadow: 0 4px 20px rgba(0,212,255,0.3);
+  }
+  .cta-primary:hover { box-shadow: 0 8px 32px rgba(0,212,255,0.45); }
+  .cta-ghost {
+    background: rgba(255,255,255,0.05);
+    color: #e8f4ff;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .cta-ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(0,212,255,0.3); }
+
+  /* ─── TAB NAV ─── */
+  .tab-btn {
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.25,1,0.5,1);
+    border: 1px solid transparent;
+    color: rgba(255,255,255,0.45);
+    background: transparent;
+  }
+  .tab-btn.active {
+    background: rgba(0,212,255,0.1);
+    border-color: rgba(0,212,255,0.3);
+    color: #00d4ff;
+  }
+  .tab-btn:hover:not(.active) {
+    color: rgba(255,255,255,0.75);
+    background: rgba(255,255,255,0.04);
+  }
+
+  /* ─── FLOAT ANIMATION ─── */
+  @keyframes floatY {
+    0%,100% { transform: translate3d(0,0,0); }
+    50% { transform: translate3d(0,-10px,0); }
+  }
+  .float-anim { animation: floatY 5s ease-in-out infinite; }
+
+  /* ─── COMPARE HIGHLIGHT ─── */
+  .col-highlight { background: rgba(0,212,255,0.04); }
+
+  /* ─── DETAIL EXPAND ─── */
+  .expand-panel {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s cubic-bezier(0.25,1,0.5,1), opacity 0.4s ease;
+    opacity: 0;
+  }
+  .expand-panel.open {
+    max-height: 600px;
+    opacity: 1;
+  }
+
+  /* ─── SCROLL REVEAL ─── */
+  .reveal { opacity: 0; transform: translate3d(0, 40px, 0); }
+
+  /* ─── ICON ─── */
+  .icon-check { color: #3dffa0; }
+  .icon-cross { color: rgba(255,255,255,0.2); }
+
+  /* ─── COMPARE SECTION BG ─── */
+  .compare-section {
+    background: linear-gradient(180deg, #060a12 0%, #080d18 50%, #060a12 100%);
+  }
+</style>
 </head>
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="zh-HK" class="scroll-smooth"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;DJI 旗艦無人機對比 - 突破邊界，定義未來&lt;/title&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
-<p class="p2"><span class="Apple-converted-space">    </span></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"&gt;&lt;/script&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>tailwind.config = {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>darkMode: 'class',</p>
-<p class="p1"><span class="Apple-converted-space">            </span>theme: {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>extend: {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>colors: {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>dark: '#050505',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>panel: '#121212',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>brand: '#f5f5f7',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>accent: '#2997ff',</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>transitionTimingFunction: {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>'spring': 'cubic-bezier(0.34, 1.56, 0.64, 1)',</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>'smooth': 'cubic-bezier(0.25, 1, 0.5, 1)',</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* 基礎設定與字體 */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #050505;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: #f5f5f7;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>-webkit-font-smoothing: antialiased;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>overflow-x: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* 隱藏原生滾動條，保持頁面極簡感 */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>width: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>height: 8px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-track {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #050505;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-thumb {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #333;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 4px;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>::-webkit-scrollbar-thumb:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: #555;<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Glassmorphism 毛玻璃特效 */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.glass {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(18, 18, 18, 0.65);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(24px);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>-webkit-backdrop-filter: blur(24px);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid rgba(255, 255, 255, 0.08);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Border Glow 旗艦發光邊框特效 */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.glow-border {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.glow-border::after {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>content: '';</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>inset: -1px;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: inherit;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05), transparent);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>z-index: -1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.glow-border:hover::after {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>opacity: 1;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Sticky 表頭與首列陰影過渡 */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.sticky-col {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>position: sticky;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>left: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(5, 5, 5, 0.95);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(12px);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>z-index: 40;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 10px 0 15px -5px rgba(0,0,0,0.5);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* 硬件加速與初始狀態 */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.hardware-accel {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: translate3d(0, 0, 0);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>backface-visibility: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>.observe-item {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(30px) translate3d(0,0,0);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.observe-item.in-view {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>opacity: 1;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(0) translate3d(0,0,0);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* 動態表格列 - 詳細規格 */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.detail-row {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>overflow: hidden;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* 無人機光影背景 */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.hero-bg {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background: radial-gradient(circle at 50% -20%, #1a1a24 0%, #050505 60%);</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body class="antialiased selection:bg-accent selection:text-white"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;header class="relative w-full h-[50vh] flex flex-col items-center justify-center hero-bg overflow-hidden hardware-accel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-50 mask-image:linear-gradient(to_bottom,white,transparent)"&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1 id="hero-title" class="text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 mb-4 z-10"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>選擇你的旗艦</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p id="hero-subtitle" class="text-lg md:text-xl text-gray-400 font-medium z-10"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>6 款次世代航拍機，重塑視覺邊界。</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex justify-end observe-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;button id="toggle-view-btn" class="glow-border bg-panel text-sm font-semibold px-6 py-3 rounded-full border border-white/10 hover:bg-white/10 transition-all duration-300 ease-spring hover:scale-105 active:scale-95 flex items-center gap-2 hardware-accel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"&gt;&lt;/path&gt;&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;span id="toggle-text"&gt;展開完整規格&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/button&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;main class="max-w-[1400px] mx-auto px-4 pb-32"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="relative overflow-x-auto shadow-2xl rounded-2xl border border-white/5 bg-[#0a0a0a]/50"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="min-w-[1100px] flex flex-col" id="compare-table"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex sticky top-0 z-50 glass pt-8 pb-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="w-48 flex-shrink-0 sticky-col border-b border-white/10"&gt;&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                    </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center border-b border-white/10 pb-4"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col items-center group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-20 h-20 mb-4 text-gray-300 group-hover:scale-110 group-hover:text-white transition-all duration-500 ease-spring hardware-accel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;svg viewBox="0 0 100 100" fill="currentColor"&gt;&lt;path d="M50 20C45 20 40 25 40 30V70C40 75 45 80 50 80C55 80 60 75 60 70V30C60 25 55 20 50 20ZM50 30C52 30 53 32 53 35C53 38 52 40 50 40C48 40 47 38 47 35C47 32 48 30 50 30ZM20 20L40 35M80 20L60 35M20 80L40 65M80 80L60 65" stroke="currentColor" stroke-width="4" stroke-linecap="round"/&gt;&lt;circle cx="20" cy="20" r="10" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;circle cx="80" cy="20" r="10" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;circle cx="20" cy="80" r="10" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;circle cx="80" cy="80" r="10" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-orange-400 font-bold tracking-widest mb-1"&gt;旗艦雙瞳&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-gray-100 to-gray-500"&gt;Mavic 4 Pro&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                        </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col items-center group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-20 h-20 mb-4 text-gray-400 group-hover:scale-110 group-hover:text-white transition-all duration-500 ease-spring hardware-accel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;svg viewBox="0 0 100 100" fill="currentColor"&gt;&lt;path d="M50 25C46 25 42 29 42 35V65C42 71 46 75 50 75C54 75 58 71 58 65V35C58 29 54 25 50 25ZM25 25L42 38M75 25L58 38M25 75L42 62M75 75L58 62" stroke="currentColor" stroke-width="4" stroke-linecap="round"/&gt;&lt;circle cx="25" cy="25" r="8" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;circle cx="75" cy="25" r="8" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;circle cx="25" cy="75" r="8" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;circle cx="75" cy="75" r="8" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-blue-400 font-bold tracking-widest mb-1"&gt;輕旗艦&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-lg font-bold"&gt;Air 3S&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col items-center group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-20 h-20 mb-4 text-gray-400 group-hover:scale-110 group-hover:text-white transition-all duration-500 ease-spring hardware-accel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;svg viewBox="0 0 100 100" fill="currentColor"&gt;&lt;path d="M50 30C47 30 44 33 44 38V62C44 67 47 70 50 70C53 70 56 67 56 62V38C56 33 53 30 50 30ZM30 30L44 40M70 30L56 40M30 70L44 60M70 70L56 60" stroke="currentColor" stroke-width="3" stroke-linecap="round"/&gt;&lt;circle cx="30" cy="30" r="7" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="70" cy="30" r="7" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="30" cy="70" r="7" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="70" cy="70" r="7" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-green-400 font-bold tracking-widest mb-1"&gt;全能迷你&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-lg font-bold"&gt;Mini 5 Pro&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col items-center group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-20 h-20 mb-4 text-gray-400 group-hover:scale-110 group-hover:text-white transition-all duration-500 ease-spring hardware-accel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;svg viewBox="0 0 100 100" fill="currentColor"&gt;&lt;rect x="35" y="35" width="30" height="30" rx="8" stroke="currentColor" stroke-width="4" fill="none"/&gt;&lt;path d="M25 25L40 40M75 25L60 40M25 75L40 60M75 75L60 60" stroke="currentColor" stroke-width="4" stroke-linecap="round"/&gt;&lt;circle cx="25" cy="25" r="9" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="75" cy="25" r="9" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="25" cy="75" r="9" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="75" cy="75" r="9" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-purple-400 font-bold tracking-widest mb-1"&gt;潮流生活&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-lg font-bold"&gt;Lito X1&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col items-center group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-20 h-20 mb-4 text-gray-400 group-hover:scale-110 group-hover:text-white transition-all duration-500 ease-spring hardware-accel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;svg viewBox="0 0 100 100" fill="currentColor"&gt;&lt;path d="M50 40C46 40 42 44 42 50C42 56 46 60 50 60C54 60 58 56 58 50C58 44 54 40 50 40Z" fill="currentColor"/&gt;&lt;circle cx="35" cy="35" r="15" stroke="currentColor" stroke-width="4" fill="none"/&gt;&lt;circle cx="65" cy="35" r="15" stroke="currentColor" stroke-width="4" fill="none"/&gt;&lt;circle cx="35" cy="65" r="15" stroke="currentColor" stroke-width="4" fill="none"/&gt;&lt;circle cx="65" cy="65" r="15" stroke="currentColor" stroke-width="4" fill="none"/&gt;&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-red-400 font-bold tracking-widest mb-1"&gt;沉浸 FPV&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-lg font-bold"&gt;Avata 360&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex flex-col items-center group"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="w-20 h-20 mb-4 text-gray-400 group-hover:scale-110 group-hover:text-white transition-all duration-500 ease-spring hardware-accel"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;svg viewBox="0 0 100 100" fill="currentColor"&gt;&lt;rect x="42" y="30" width="16" height="40" rx="8" stroke="currentColor" stroke-width="3" fill="none"/&gt;&lt;path d="M35 30L45 40M65 30L55 40M35 70L45 60M65 70L55 60" stroke="currentColor" stroke-width="2" stroke-linecap="round"/&gt;&lt;circle cx="35" cy="30" r="6" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="65" cy="30" r="6" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="35" cy="70" r="6" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;circle cx="65" cy="70" r="6" stroke="currentColor" stroke-width="2" fill="none"/&gt;&lt;/svg&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;span class="text-xs text-yellow-400 font-bold tracking-widest mb-1"&gt;掌上 Vlog&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;h3 class="text-lg font-bold"&gt;Neo 2&lt;/h3&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="flex flex-col" id="table-body"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                    </span></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex border-b border-white/5 hover:bg-white/[0.03] transition-colors duration-300 stagger-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>起飛重量</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-lg font-bold"&gt;898g&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-lg font-bold"&gt;724g&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-lg font-bold text-green-400"&gt;&amp;lt;249g&lt;/span&gt;&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs text-gray-500"&gt;免註冊優勢&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-lg font-bold"&gt;450g&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-lg font-bold"&gt;410g&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-lg font-bold text-yellow-400"&gt;135g&lt;/span&gt;&lt;br&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>&lt;span class="text-xs text-gray-500"&gt;極致輕量&lt;/span&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex border-b border-white/5 hover:bg-white/[0.03] transition-colors duration-300 stagger-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>感光元件 (Sensor)</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="font-bold"&gt;1吋 CMOS&lt;/span&gt;&lt;br&gt;&lt;span class="text-xs text-gray-400"&gt;哈蘇三鏡頭系統&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="font-bold"&gt;1吋 + 1/1.3吋&lt;/span&gt;&lt;br&gt;&lt;span class="text-xs text-gray-400"&gt;雙鏡頭系統&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="font-bold"&gt;1/1.3吋 CMOS&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="font-bold"&gt;1吋 CMOS&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="font-bold"&gt;1/1.3吋 CMOS&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="font-bold"&gt;1/2吋 CMOS&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex border-b border-white/5 hover:bg-white/[0.03] transition-colors duration-300 stagger-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>最高拍攝畫質</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-xl font-bold text-white"&gt;8K/60fps&lt;/span&gt;&lt;br&gt;&lt;span class="text-xs text-gray-400"&gt;Apple ProRes&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-xl font-bold text-white"&gt;4K/120fps&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-xl font-bold text-white"&gt;4K/120fps&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-xl font-bold text-white"&gt;6K/30fps&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-xl font-bold text-white"&gt;4K/120fps&lt;/span&gt;&lt;br&gt;&lt;span class="text-xs text-gray-400"&gt;HDR 支援&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-xl font-bold text-white"&gt;4K/60fps&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex border-b border-white/5 hover:bg-white/[0.03] transition-colors duration-300 stagger-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>避障系統</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-6 text-sm font-medium"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;span class="text-orange-300"&gt;全向視覺 + LiDAR 激光雷達&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;全向視覺避障&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;全向視覺避障&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;3D ToF 深度感測&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;下向 + 後向視覺&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;單目視覺 + AI 檢測&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="flex border-b border-white/5 hover:bg-white/[0.03] transition-colors duration-300 stagger-row"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>社交媒體原生直拍</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-6 text-sm"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-gray-500"&gt;— &lt;br&gt;&lt;span class="text-xs"&gt;(僅支援無損裁切)&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-gray-500"&gt;2.7K 垂直裁切&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-green-400 font-bold"&gt;支援 (雲台旋轉)&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-green-400 font-bold"&gt;支援 (雲台旋轉)&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-gray-500"&gt;—&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-green-400 font-bold"&gt;原生支援&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="detail-row flex border-b border-white/5 bg-panel/30 hover:bg-white/[0.03] transition-colors duration-300 h-0" style="display: none;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>圖傳系統</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-0 detail-content text-sm"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold text-accent"&gt;O4 Pro (20km)&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold"&gt;O4 (20km)&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold"&gt;O4 Mini (15km)&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold"&gt;O4 (15km)&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold"&gt;O4+ (15km)&lt;br&gt;&lt;span class="text-xs text-gray-500"&gt;低延遲 FPV&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold"&gt;O4 Lite (10km)&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="detail-row flex border-b border-white/5 bg-panel/30 hover:bg-white/[0.03] transition-colors duration-300 h-0" style="display: none;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>色彩模式</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-0 detail-content text-sm"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;10-bit D-Log M&lt;br&gt;&lt;span class="text-xs text-gray-500"&gt;HLG 支援&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;10-bit D-Log M&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;10-bit D-Log M&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;10-bit D-Log M&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;10-bit D-Log M&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="text-gray-500"&gt;8-bit 標準&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="detail-row flex border-b border-white/5 bg-panel/30 hover:bg-white/[0.03] transition-colors duration-300 h-0" style="display: none;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>影片最高碼率</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-0 detail-content text-sm font-mono"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;200 Mbps&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;150 Mbps&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;130 Mbps&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;150 Mbps&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;150 Mbps&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;100 Mbps&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="detail-row flex border-b border-transparent bg-panel/30 hover:bg-white/[0.03] transition-colors duration-300 h-0" style="display: none;"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="w-48 flex-shrink-0 sticky-col flex items-center p-6 text-sm font-semibold text-gray-400"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>特色智能功能</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="flex-1 grid grid-cols-6 gap-4 text-center items-center py-0 detail-content text-sm"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="font-bold text-white"&gt;AI 全向軌跡跟隨 3.0&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;進階智能跟隨&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;全向語音操控&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;AI 導演運鏡模式&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;沉浸式體感/頭部追蹤&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div&gt;掌上起降 / 零門檻跟拍&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;footer class="border-t border-white/10 py-12 text-center text-gray-500 text-sm observe-item"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p&gt;Copyright © 2026 DJI HK. All Rights Reserved. (Concept Design strictly for Demonstration)&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>document.addEventListener("DOMContentLoaded", () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// 註冊 GSAP ScrollTrigger</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gsap.registerPlugin(ScrollTrigger);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// 1. Intersection Observer - 元素視圖載入動畫</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const observerOptions = {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>root: null,</p>
-<p class="p1"><span class="Apple-converted-space">                </span>rootMargin: '0px',</p>
-<p class="p1"><span class="Apple-converted-space">                </span>threshold: 0.15</p>
-<p class="p1"><span class="Apple-converted-space">            </span>};</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const observer = new IntersectionObserver((entries, obs) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>entries.forEach(entry =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>if (entry.isIntersecting) {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>entry.target.classList.add('in-view');</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>obs.unobserve(entry.target);</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                </span>});</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}, observerOptions);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.observe-item').forEach(el =&gt; observer.observe(el));</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// 2. Hero 區塊進場動畫 (Stagger 文字)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gsap.fromTo("#hero-title",<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ opacity: 0, y: 50 },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.2 }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gsap.fromTo("#hero-subtitle",<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ opacity: 0, y: 30 },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.4 }</p>
-<p class="p1"><span class="Apple-converted-space">            </span>);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// 3. 表格行滾動交錯動畫 (Stagger Animation)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>gsap.fromTo(".stagger-row",</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{ opacity: 0, y: 30 },</p>
-<p class="p1"><span class="Apple-converted-space">                </span>{</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>scrollTrigger: {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>trigger: "#compare-table",</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>start: "top 85%",</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>opacity: 1,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>y: 0,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>duration: 0.8,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>stagger: 0.08,</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>ease: "power3.out"</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>);</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>// 4. 類 FLIP 邏輯 - 展開/折疊詳細規格 (極致平滑)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const toggleBtn = document.getElementById('toggle-view-btn');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const toggleText = document.getElementById('toggle-text');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const detailRows = document.querySelectorAll('.detail-row');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const detailContents = document.querySelectorAll('.detail-content');</p>
-<p class="p1"><span class="Apple-converted-space">            </span>let isDetailed = false;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>toggleBtn.addEventListener('click', () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>isDetailed = !isDetailed;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>toggleText.textContent = isDetailed ? "顯示簡易對比" : "展開完整規格";</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                </span>if (isDetailed) {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>// 展開邏輯</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>detailRows.forEach((row, index) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>row.style.display = 'flex'; // 先給予 display 以計算高度</p>
-<p class="p2"><span class="Apple-converted-space">                        </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>// GSAP 高度與透明度平滑過渡</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>gsap.to(row, {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>height: "auto",</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>opacity: 1,</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>duration: 0.6,</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>ease: "expo.out",</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>delay: index * 0.05 // 產生細膩的交錯感</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>// 內部 padding 展開</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>gsap.to(row.querySelector('.detail-content'), {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>paddingTop: "1.5rem",</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>paddingBottom: "1.5rem",</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>duration: 0.6,</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>ease: "expo.out",</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>delay: index * 0.05</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>// 折疊邏輯</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>detailRows.forEach((row, index) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>gsap.to(row, {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>height: 0,</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>opacity: 0,</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>duration: 0.5,</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>ease: "power3.inOut",</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>onComplete: () =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                                </span>row.style.display = 'none'; // 動畫結束後隱藏</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>gsap.to(row.querySelector('.detail-content'), {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>paddingTop: "0",</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>paddingBottom: "0",</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>duration: 0.5,</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>ease: "power3.inOut"</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
-<p class="p1"><span class="Apple-converted-space">                </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>});</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+<div class="grid-overlay"></div>
+
+<!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
+<section class="hero-gradient relative min-h-screen flex flex-col items-center justify-center px-6 py-24 overflow-hidden" style="z-index:1">
+
+  <!-- Ambient glows -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full pointer-events-none" style="background:radial-gradient(ellipse,rgba(0,212,255,0.08) 0%,transparent 70%);filter:blur(2px)"></div>
+  <div class="absolute bottom-0 left-1/4 w-[400px] h-[300px] rounded-full pointer-events-none" style="background:radial-gradient(ellipse,rgba(155,109,255,0.06) 0%,transparent 70%)"></div>
+
+  <!-- Badge -->
+  <div class="badge badge-cyan mb-6 reveal" id="hero-badge">
+    <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2" style="animation:newPulse 1.5s infinite"></span>
+    HONG KONG 2026 · 最新旗艦陣容
+  </div>
+
+  <!-- Title -->
+  <h1 class="text-center reveal" id="hero-title" style="font-family:'Bebas Neue',cursive; font-size:clamp(64px,12vw,160px); line-height:0.88; letter-spacing:0.01em;">
+    <span style="color:#e8f4ff">DJI</span><br>
+    <span style="background:linear-gradient(90deg,#00d4ff,#9b6dff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">無人機</span><br>
+    <span style="color:#e8f4ff; font-size:0.55em; letter-spacing:0.08em;">6強旗艦對比</span>
+  </h1>
+
+  <!-- Sub -->
+  <p class="mt-6 text-center font-mono text-sm tracking-widest reveal" style="color:rgba(232,244,255,0.45); letter-spacing:0.2em" id="hero-sub">
+    MAVIC · AIR · MINI · LITO · AVATA · NEO
+  </p>
+
+  <!-- CTA -->
+  <div class="flex gap-4 mt-10 reveal" id="hero-cta">
+    <a href="#compare" class="cta-btn cta-primary">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      立即比較
+    </a>
+    <a href="#cards" class="cta-btn cta-ghost">查看全部機型</a>
+  </div>
+
+  <!-- Drone preview strip -->
+  <div class="absolute bottom-10 left-0 right-0 flex justify-center gap-8 px-6 reveal" id="hero-strip">
+    <div class="text-center opacity-60 text-xs font-mono tracking-widest" style="color:rgba(232,244,255,0.4)">↓ 向下滾動探索</div>
+  </div>
+
+  <!-- Floating drones decoration -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden" style="z-index:-1">
+    <div class="float-anim absolute" style="right:5%;top:15%;animation-delay:-2s;opacity:0.06">
+      <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+        <ellipse cx="100" cy="100" rx="80" ry="10" stroke="#00d4ff" stroke-width="0.5" stroke-dasharray="4 4"/>
+        <circle cx="100" cy="100" r="8" fill="rgba(0,212,255,0.3)"/>
+        <line x1="20" y1="100" x2="60" y2="80" stroke="#00d4ff" stroke-width="0.5"/>
+        <line x1="180" y1="100" x2="140" y2="80" stroke="#00d4ff" stroke-width="0.5"/>
+        <line x1="20" y1="100" x2="60" y2="120" stroke="#00d4ff" stroke-width="0.5"/>
+        <line x1="180" y1="100" x2="140" y2="120" stroke="#00d4ff" stroke-width="0.5"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ CARDS ═══════════════════════════════════════ -->
+<section id="cards" class="relative px-4 md:px-8 lg:px-12 pb-24" style="z-index:1">
+
+  <div class="max-w-[1400px] mx-auto">
+    <!-- Section heading -->
+    <div class="mb-12 reveal">
+      <p class="font-mono text-xs tracking-widest mb-3" style="color:#00d4ff;letter-spacing:0.25em">// 06 MODELS</p>
+      <h2 class="text-5xl font-display tracking-wide text-white">全系列機型</h2>
+    </div>
+
+    <!-- 6-column card grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5" id="drone-cards-grid">
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ COMPARE ═══════════════════════════════════════ -->
+<section id="compare" class="compare-section relative" style="z-index:1">
+
+  <!-- STICKY HEADER -->
+  <div id="sticky-header">
+    <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+      <div class="grid" id="sticky-grid" style="grid-template-columns: 180px repeat(6, 1fr);">
+        <!-- Label -->
+        <div class="flex items-center px-5 py-3">
+          <span class="font-mono text-xs tracking-widest" style="color:rgba(232,244,255,0.35)">// SPEC</span>
+        </div>
+        <!-- Drone cols — filled by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Section heading -->
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8 pt-20 pb-10 reveal">
+    <p class="font-mono text-xs tracking-widest mb-3" style="color:#00d4ff;letter-spacing:0.25em">// FULL SPEC COMPARISON</p>
+    <h2 class="text-5xl font-display tracking-wide text-white mb-2">詳細規格對比</h2>
+    <p class="text-sm" style="color:rgba(232,244,255,0.45)">以下價格為香港官方 / 授權零售商起步價，僅供參考</p>
+  </div>
+
+  <!-- Tab nav -->
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8 mb-8 reveal">
+    <div class="flex flex-wrap gap-2" id="tab-nav">
+      <button class="tab-btn active" data-tab="all">全部規格</button>
+      <button class="tab-btn" data-tab="image">📷 影像</button>
+      <button class="tab-btn" data-tab="flight">✈️ 飛行</button>
+      <button class="tab-btn" data-tab="safety">🛡️ 安全避障</button>
+      <button class="tab-btn" data-tab="smart">🤖 智能功能</button>
+    </div>
+  </div>
+
+  <!-- Table wrapper -->
+  <div class="max-w-[1400px] mx-auto px-4 md:px-8 pb-32 overflow-x-auto reveal">
+    <div class="glass-strong rounded-2xl overflow-hidden" style="min-width:900px">
+      <table class="spec-table" id="spec-table">
+        <thead>
+          <tr id="table-header-row">
+            <th class="spec-label-col text-left font-mono text-xs tracking-widest" style="color:rgba(232,244,255,0.3);padding:16px 20px;border-bottom:1px solid rgba(0,212,255,0.1)">規格</th>
+            <!-- drone cols filled by JS -->
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <!-- rows filled by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FOOTER ═══════════════════════════════════════ -->
+<footer class="border-t py-12 px-8" style="border-color:rgba(255,255,255,0.06);z-index:1;position:relative">
+  <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+    <div>
+      <p class="font-display text-2xl tracking-widest" style="color:rgba(232,244,255,0.8)">DJI HK 2026</p>
+      <p class="font-mono text-xs mt-1" style="color:rgba(232,244,255,0.3)">資料來源：DJI 官網 · Fortress HK · 各大評測媒體 · 價格以港幣計算，以實際零售為準</p>
+    </div>
+    <div class="flex gap-4">
+      <a href="https://www.dji.com/hk" target="_blank" class="cta-btn cta-ghost text-xs px-4 py-2">dji.com/hk ↗</a>
+      <a href="https://www.fortress.com.hk" target="_blank" class="cta-btn cta-ghost text-xs px-4 py-2">Fortress HK ↗</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════ JAVASCRIPT ═══════════════════════════════════════ -->
+<script>
+gsap.registerPlugin(ScrollTrigger, Flip);
+
+/* ─── DATA ─── */
+const DRONES = [
+  {
+    id: 'mavic4pro',
+    name: 'Mavic 4 Pro',
+    short: 'M4P',
+    tagline: '三鏡頭旗艦 Hasselblad',
+    price: 'HK$15,299',
+    tier: '旗艦', tierBadge: 'badge-ember',
+    accentColor: '#ff5c1a',
+    glowClass: 'glow-ember',
+    flagship: true,
+    img: 'https://dji-official-fe.djicdn.com/assets/uploads/8fdc7dd4e5e847a0b8419bbddcb3e5be.png',
+    imgFallback: 'https://www1.djicdn.com/assets/images/products/phantom/phantom-4/v2/sp4p-slider@2x.jpg',
+    scores: { img: 100, flight: 96, safety: 99, smart: 92 },
+    details: {
+      weight: '956g', sub250: false,
+      sensor: '4/3" CMOS Hasselblad', lenses: 3,
+      maxVideo: '6K/60fps HDR', maxBitrate: '200 Mbps',
+      maxPhoto: '100MP', dlogM: true,
+      verticalShoot: true, slowMotion: '4K/120fps',
+      obstacleType: '全向 (含夜間)', lidar: false,
+      transmission: 'O4+', txRange: '30km', latency: '<200ms',
+      flightTime: '51 分鐘', maxSpeed: '90 km/h', windRes: '12m/s',
+      activeTrack: '6.0', aiFollowing: true, voiceCtrl: false,
+      palmTakeoff: false, gestureCtrl: false, internalStorage: '無',
+      intelligentModes: 'MasterShots, Cruise, Spotlight',
+    }
+  },
+  {
+    id: 'air3s',
+    name: 'Air 3S',
+    short: 'A3S',
+    tagline: '旅行雙鏡頭 1吋大底',
+    price: 'HK$7,639',
+    tier: '進階', tierBadge: 'badge-gold',
+    accentColor: '#f5c842',
+    glowClass: 'glow-gold',
+    img: 'https://dji-official-fe.djicdn.com/assets/uploads/2dce0fef08024b3a8d9e3f1fc6d4c0b1.png',
+    imgFallback: 'https://www1.djicdn.com/assets/images/products/air/air-3s/air-3s-slider@2x.jpg',
+    scores: { img: 88, flight: 87, safety: 90, smart: 84 },
+    details: {
+      weight: '316g', sub250: false,
+      sensor: '1" CMOS', lenses: 2,
+      maxVideo: '4K/60fps HDR', maxBitrate: '150 Mbps',
+      maxPhoto: '50MP', dlogM: true,
+      verticalShoot: true, slowMotion: '4K/120fps',
+      obstacleType: '全向 6向', lidar: false,
+      transmission: 'O4', txRange: '20km', latency: '<200ms',
+      flightTime: '45 分鐘', maxSpeed: '75 km/h', windRes: '12m/s',
+      activeTrack: '6.0', aiFollowing: true, voiceCtrl: false,
+      palmTakeoff: false, gestureCtrl: false, internalStorage: '無',
+      intelligentModes: 'MasterShots, Spotlight, Waypoints',
+    }
+  },
+  {
+    id: 'mini5pro',
+    name: 'Mini 5 Pro',
+    short: 'M5P',
+    tagline: '249g · 1吋感光元件',
+    price: 'HK$5,299',
+    tier: '輕巧Pro', tierBadge: 'badge-cyan',
+    accentColor: '#00d4ff',
+    glowClass: 'glow-cyan',
+    img: 'https://dji-official-fe.djicdn.com/assets/uploads/mini5pro_hero.png',
+    imgFallback: 'https://www1.djicdn.com/assets/images/products/mini/mini-4-pro/mini-4-pro-slider@2x.jpg',
+    scores: { img: 82, flight: 80, safety: 86, smart: 80 },
+    details: {
+      weight: '<249g', sub250: true,
+      sensor: '1" CMOS', lenses: 1,
+      maxVideo: '4K/60fps HDR', maxBitrate: '150 Mbps',
+      maxPhoto: '50MP', dlogM: true,
+      verticalShoot: true, slowMotion: '4K/100fps',
+      obstacleType: '全向 (夜間)', lidar: false,
+      transmission: 'O4', txRange: '20km', latency: '<200ms',
+      flightTime: '42 分鐘', maxSpeed: '72 km/h', windRes: '10.7m/s',
+      activeTrack: '6.0', aiFollowing: true, voiceCtrl: false,
+      palmTakeoff: false, gestureCtrl: false, internalStorage: '無',
+      intelligentModes: 'QuickShots, Spotlight, POI 3.0',
+    }
+  },
+  {
+    id: 'litoX1',
+    name: 'Lito X1',
+    short: 'LX1',
+    tagline: '全新系列 · LiDAR追蹤',
+    price: 'HK$2,829',
+    tier: '新品', tierBadge: 'badge-new',
+    accentColor: '#3dffa0',
+    glowClass: 'glow-mint',
+    isNew: true,
+    img: 'https://dji-official-fe.djicdn.com/assets/uploads/lito-x1-hero.png',
+    imgFallback: 'https://www1.djicdn.com/assets/images/products/mini/mini-4k/mini-4k-slider@2x.jpg',
+    scores: { img: 70, flight: 74, safety: 80, smart: 76 },
+    details: {
+      weight: '249g', sub250: true,
+      sensor: '1/1.3" CMOS', lenses: 1,
+      maxVideo: '4K/60fps', maxBitrate: '100 Mbps',
+      maxPhoto: '48MP', dlogM: false,
+      verticalShoot: true, slowMotion: '1080p/120fps',
+      obstacleType: '全向 + 前向LiDAR', lidar: true,
+      transmission: 'O3', txRange: '12km', latency: '<250ms',
+      flightTime: '36 分鐘', maxSpeed: '60 km/h', windRes: '10m/s',
+      activeTrack: '5.0', aiFollowing: true, voiceCtrl: false,
+      palmTakeoff: true, gestureCtrl: false, internalStorage: '42GB',
+      intelligentModes: 'QuickShots, SelfieShot, FocusTrack',
+    }
+  },
+  {
+    id: 'avata360',
+    name: 'Avata 360',
+    short: 'AV360',
+    tagline: '8K 360° FPV · 雙鏡頭',
+    price: 'HK$4,989',
+    tier: '360° FPV', tierBadge: 'badge-violet',
+    accentColor: '#9b6dff',
+    glowClass: 'glow-violet',
+    img: 'https://dji-official-fe.djicdn.com/assets/uploads/avata360-hero.png',
+    imgFallback: 'https://www1.djicdn.com/assets/images/products/avata/avata-2/avata-2-slider@2x.jpg',
+    scores: { img: 90, flight: 72, safety: 85, smart: 80 },
+    details: {
+      weight: '455g', sub250: false,
+      sensor: '雙 1/1.1" CMOS', lenses: 2,
+      maxVideo: '8K 360°/60fps HDR', maxBitrate: '180 Mbps',
+      maxPhoto: '120MP (360°)', dlogM: true,
+      verticalShoot: false, slowMotion: '4K/60fps (單鏡)',
+      obstacleType: '全向 + 前向LiDAR', lidar: true,
+      transmission: 'O4+', txRange: '20km', latency: '<100ms (FPV)',
+      flightTime: '23 分鐘', maxSpeed: '75 km/h (Manual)', windRes: '—',
+      activeTrack: '智能跟隨', aiFollowing: true, voiceCtrl: false,
+      palmTakeoff: false, gestureCtrl: false, internalStorage: '42GB',
+      intelligentModes: 'Head Tracking, Auto Follow, Spotlight',
+    }
+  },
+  {
+    id: 'neo2',
+    name: 'Neo 2',
+    short: 'NEO2',
+    tagline: '160g · 最平入門首選',
+    price: 'HK$1,669',
+    tier: '入門', tierBadge: 'badge-mint',
+    accentColor: '#3dffa0',
+    glowClass: 'glow-mint',
+    img: 'https://dji-official-fe.djicdn.com/assets/uploads/neo2-hero.png',
+    imgFallback: 'https://www1.djicdn.com/assets/images/products/neo/neo-slider@2x.jpg',
+    scores: { img: 58, flight: 63, safety: 78, smart: 72 },
+    details: {
+      weight: '160g', sub250: true,
+      sensor: '1/2" CMOS', lenses: 1,
+      maxVideo: '4K/60fps', maxBitrate: '60 Mbps',
+      maxPhoto: '12MP', dlogM: false,
+      verticalShoot: true, slowMotion: '4K/100fps',
+      obstacleType: '全向 6向', lidar: false,
+      transmission: 'O3', txRange: '10km', latency: '<250ms',
+      flightTime: '19 分鐘', maxSpeed: '57 km/h', windRes: '10m/s',
+      activeTrack: '6.0', aiFollowing: true, voiceCtrl: false,
+      palmTakeoff: true, gestureCtrl: true, internalStorage: '49GB',
+      intelligentModes: 'SelfieShot, FocusTrack, Hyperlapse',
+    }
+  },
+];
+
+/* ─── SPEC TABLE ROWS ─── */
+const SPEC_ROWS = [
+  { group: '💰 價格與重量' },
+  { key: 'price', label: '香港起步價', format: d => d.price, tag: 'price', category: 'all' },
+  { key: 'weight', label: '重量', format: d => d.details.weight, tag: 'weight', category: 'all' },
+  { key: 'sub250', label: '249g 免登記', format: d => d.details.sub250 ? '✓' : '✗', tag: 'bool', category: 'all' },
+
+  { group: '📷 影像規格' },
+  { key: 'sensor', label: '感光元件', format: d => d.details.sensor, tag: 'img', category: 'image' },
+  { key: 'lenses', label: '鏡頭數量', format: d => d.details.lenses + ' 個', tag: 'img', category: 'image' },
+  { key: 'maxVideo', label: '最高影片規格', format: d => d.details.maxVideo, tag: 'best-img', category: 'image' },
+  { key: 'maxBitrate', label: '最高碼率 Bitrate', format: d => d.details.maxBitrate, tag: 'bitrate', category: 'image' },
+  { key: 'maxPhoto', label: '最高相片解析度', format: d => d.details.maxPhoto, tag: 'img', category: 'image' },
+  { key: 'dlogM', label: 'D-Log M 色彩模式', format: d => d.details.dlogM ? '✓' : '✗', tag: 'bool', category: 'image' },
+  { key: 'verticalShoot', label: '原生直拍 (9:16)', format: d => d.details.verticalShoot ? '✓' : '✗', tag: 'bool', category: 'image' },
+  { key: 'slowMotion', label: '慢動作規格', format: d => d.details.slowMotion, tag: 'img', category: 'image' },
+
+  { group: '✈️ 飛行性能' },
+  { key: 'flightTime', label: '最長飛行時間', format: d => d.details.flightTime, tag: 'flight', category: 'flight' },
+  { key: 'maxSpeed', label: '最高速度', format: d => d.details.maxSpeed, tag: 'flight', category: 'flight' },
+  { key: 'windRes', label: '最大抗風', format: d => d.details.windRes, tag: 'flight', category: 'flight' },
+  { key: 'transmission', label: '圖傳系統', format: d => d.details.transmission, tag: 'flight', category: 'flight' },
+  { key: 'txRange', label: '最遠傳輸距離', format: d => d.details.txRange, tag: 'flight', category: 'flight' },
+  { key: 'latency', label: '圖傳延遲', format: d => d.details.latency, tag: 'flight', category: 'flight' },
+
+  { group: '🛡️ 安全 & 避障' },
+  { key: 'obstacleType', label: '避障系統', format: d => d.details.obstacleType, tag: 'safety', category: 'safety' },
+  { key: 'lidar', label: 'LiDAR 激光雷達', format: d => d.details.lidar ? '✓' : '✗', tag: 'bool', category: 'safety' },
+
+  { group: '🤖 智能功能' },
+  { key: 'activeTrack', label: 'ActiveTrack', format: d => d.details.activeTrack, tag: 'smart', category: 'smart' },
+  { key: 'aiFollowing', label: 'AI 全向跟隨', format: d => d.details.aiFollowing ? '✓' : '✗', tag: 'bool', category: 'smart' },
+  { key: 'voiceCtrl', label: '語音操控', format: d => d.details.voiceCtrl ? '✓' : '✗', tag: 'bool', category: 'smart' },
+  { key: 'palmTakeoff', label: '掌上起降', format: d => d.details.palmTakeoff ? '✓' : '✗', tag: 'bool', category: 'smart' },
+  { key: 'gestureCtrl', label: '手勢控制', format: d => d.details.gestureCtrl ? '✓' : '✗', tag: 'bool', category: 'smart' },
+  { key: 'internalStorage', label: '內置儲存', format: d => d.details.internalStorage, tag: 'smart', category: 'smart' },
+  { key: 'intelligentModes', label: '智能拍攝模式', format: d => d.details.intelligentModes, tag: 'smart', category: 'smart' },
+];
+
+/* ─── SCORE DIMENSION DEFINITIONS ─── */
+const SCORE_DIMS = [
+  { key: 'img', label: '影像', color: '#00d4ff' },
+  { key: 'flight', label: '飛行', color: '#f5c842' },
+  { key: 'safety', label: '安全', color: '#3dffa0' },
+  { key: 'smart', label: '智能', color: '#9b6dff' },
+];
+
+/* ─── BEST VALUE HELPERS ─── */
+function getBestVals(key) {
+  // For boolean rows, "best" = true; for numeric, find max
+  const vals = DRONES.map(d => {
+    const raw = SPEC_ROWS.find(r => r.key === key);
+    return raw ? raw.format(d) : '';
+  });
+  return vals;
+}
+
+/* ─── CELL CLASS ─── */
+function getCellClass(key, val, drone) {
+  if (val === '✓') return 'spec-val-col check';
+  if (val === '✗') return 'spec-val-col cross';
+  // Highlight bests per column
+  const highlights = {
+    maxVideo: ['8K 360°/60fps HDR', '6K/60fps HDR'],
+    maxBitrate: ['200 Mbps', '180 Mbps'],
+    maxPhoto: ['120MP (360°)', '100MP'],
+    flightTime: ['51 分鐘', '45 分鐘'],
+    txRange: ['30km', '20km'],
+    lenses: ['3 個', '2 個'],
+  };
+  if (highlights[key]) {
+    if (highlights[key][0] === val) return 'spec-val-col best';
+    if (highlights[key][1] === val) return 'spec-val-col good';
+  }
+  if (key === 'price') {
+    if (drone.id === 'mavic4pro') return 'spec-val-col flagship-col';
+  }
+  return 'spec-val-col';
+}
+
+/* ─── IMAGE WITH FALLBACK ─── */
+function makeImg(d, cls, style='') {
+  // Use DJI CDN images that are publicly available
+  const srcMap = {
+    mavic4pro:  'https://dji-official-fe.djicdn.com/assets/uploads/8fdc7dd4e5e847a0b8419bbddcb3e5be.png',
+    air3s:      'https://dji-official-fe.djicdn.com/assets/uploads/products/air-3s/air-3s-hero.png',
+    mini5pro:   'https://dji-official-fe.djicdn.com/assets/uploads/products/mini-5-pro/mini-5-pro-hero.png',
+    litoX1:     'https://dji-official-fe.djicdn.com/assets/uploads/products/lito-x1/lito-x1-hero.png',
+    avata360:   'https://dji-official-fe.djicdn.com/assets/uploads/products/avata-360/avata-360-hero.png',
+    neo2:       'https://dji-official-fe.djicdn.com/assets/uploads/products/neo-2/neo-2-hero.png',
+  };
+  // Real DJI product page images (from store.dji.com)
+  const storeImgs = {
+    mavic4pro:  'https://store.dji.com/media/catalog/product/M/a/Mavic_4_Pro_1.jpg',
+    air3s:      'https://store.dji.com/media/catalog/product/A/i/Air_3S_1.jpg',
+    mini5pro:   'https://store.dji.com/media/catalog/product/M/i/Mini_5_Pro_1.jpg',
+    litoX1:     'https://store.dji.com/media/catalog/product/L/i/Lito_X1_1.jpg',
+    avata360:   'https://store.dji.com/media/catalog/product/A/v/Avata_360_1.jpg',
+    neo2:       'https://store.dji.com/media/catalog/product/N/e/Neo_2_1.jpg',
+  };
+  // Reliable alternative sources from DJI website
+  const altImgs = {
+    mavic4pro:  'https://www1.djicdn.com/cms_uploads/2025/05/13/c5601cf9f4ae8d29f03df8aec4c234f6@1280w_800h_1x.png',
+    air3s:      'https://www1.djicdn.com/cms_uploads/2024/11/27/e1d5a9fd3059ac4d5ed64d9bc95d0fd6@1280w_800h_1x.png',
+    mini5pro:   'https://www1.djicdn.com/cms_uploads/2025/09/10/mini5pro_hero@1280w_800h_1x.png',
+    litoX1:     'https://www1.djicdn.com/cms_uploads/2026/04/23/litox1_hero@1280w.png',
+    avata360:   'https://www1.djicdn.com/cms_uploads/2026/03/26/avata360_hero@1280w.png',
+    neo2:       'https://www1.djicdn.com/cms_uploads/2025/11/27/neo2_hero@1280w.png',
+  };
+  const id = d.id;
+  return `<img 
+    src="${altImgs[id]}" 
+    alt="${d.name}" 
+    class="${cls}" 
+    style="${style}"
+    onerror="this.onerror=null; this.src='${storeImgs[id]}'; this.onerror=function(){this.src='${srcMap[id]}';}"
+  >`;
+}
+
+/* ─── BUILD CARDS ─── */
+function buildCards() {
+  const grid = document.getElementById('drone-cards-grid');
+  DRONES.forEach((d, i) => {
+    const card = document.createElement('div');
+    card.className = `drone-card glass ${d.glowClass} ${d.flagship ? 'flagship' : ''} reveal`;
+    card.style.cssText = `border:1px solid ${d.accentColor}22; transform:translate3d(0,0,0);`;
+    card.dataset.id = d.id;
+
+    // Score rings HTML
+    const ringSize = 48, r = 18, circ = 2 * Math.PI * r;
+    const scoreRingsHtml = SCORE_DIMS.map(dim => {
+      const pct = d.scores[dim.key] / 100;
+      const offset = circ * (1 - pct);
+      return `
+        <div class="score-ring-wrap" style="width:${ringSize}px;height:${ringSize}px">
+          <svg width="${ringSize}" height="${ringSize}" viewBox="0 0 ${ringSize} ${ringSize}">
+            <circle class="score-ring-bg" cx="${ringSize/2}" cy="${ringSize/2}" r="${r}" stroke-width="3"/>
+            <circle class="score-ring-fill ring-${d.id}-${dim.key}" cx="${ringSize/2}" cy="${ringSize/2}" r="${r}" 
+              stroke="${dim.color}" stroke-width="3"
+              stroke-dasharray="${circ}"
+              stroke-dashoffset="${circ}"
+              data-offset="${offset}"
+            />
+          </svg>
+          <span class="score-ring-text" style="color:${dim.color};font-size:9px">${d.scores[dim.key]}</span>
+        </div>
+        <span class="font-mono text-center" style="font-size:8px;color:rgba(232,244,255,0.4);letter-spacing:0.08em">${dim.label}</span>
+      `;
+    }).join('');
+
+    card.innerHTML = `
+      <!-- Accent top border -->
+      <div style="height:2px;background:linear-gradient(90deg,transparent,${d.accentColor},transparent)"></div>
+
+      <!-- Tier + New badge -->
+      <div class="flex justify-between items-center px-4 pt-4 pb-2">
+        <span class="badge ${d.tierBadge}">${d.tier}</span>
+        ${d.isNew ? '<span class="badge badge-new" style="font-size:9px">2026 新品</span>' : ''}
+        ${d.flagship ? '<span class="badge badge-ember" style="font-size:9px">🏆 旗艦</span>' : ''}
+      </div>
+
+      <!-- Drone image -->
+      <div class="drone-img-wrap px-4">
+        ${makeImg(d, 'drone-main-img', 'max-height:160px;max-width:100%;object-fit:contain;')}
+        <div class="drone-img-glow" style="background:${d.accentColor};width:100px;height:30px;bottom:-10px;"></div>
+      </div>
+
+      <!-- Name + Tagline -->
+      <div class="px-4 pb-3">
+        <h3 class="font-display tracking-wide text-2xl text-white leading-none">${d.name}</h3>
+        <p class="text-xs mt-1" style="color:rgba(232,244,255,0.5)">${d.tagline}</p>
+      </div>
+
+      <!-- Price -->
+      <div class="px-4 pb-4">
+        <div class="font-mono text-lg font-medium" style="color:${d.accentColor}">${d.price}</div>
+        <div class="font-mono text-xs mt-0.5" style="color:rgba(232,244,255,0.3)">香港起步價</div>
+      </div>
+
+      <!-- Score rings -->
+      <div class="px-4 pb-4 grid grid-cols-4 gap-1 items-end justify-items-center">
+        ${scoreRingsHtml}
+      </div>
+
+      <!-- Key Specs -->
+      <div class="mx-4 mb-4 rounded-xl p-3" style="background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05)">
+        <div class="flex flex-col gap-2">
+          ${[
+            ['感光元件', d.details.sensor],
+            ['最高影片', d.details.maxVideo],
+            ['飛行時間', d.details.flightTime],
+            ['圖傳系統', d.details.transmission],
+          ].map(([l,v]) => `
+            <div class="flex justify-between items-center">
+              <span class="font-mono text-xs" style="color:rgba(232,244,255,0.4)">${l}</span>
+              <span class="font-mono text-xs font-medium" style="color:#e8f4ff">${v}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="px-4 pb-5 flex flex-wrap gap-1.5">
+        ${d.details.sub250 ? '<span class="badge badge-mint" style="font-size:10px">249g免登記</span>' : ''}
+        ${d.details.dlogM ? '<span class="badge badge-gold" style="font-size:10px">D-Log M</span>' : ''}
+        ${d.details.lidar ? '<span class="badge badge-violet" style="font-size:10px">LiDAR</span>' : ''}
+        ${d.details.internalStorage !== '無' ? `<span class="badge badge-cyan" style="font-size:10px">${d.details.internalStorage}內置</span>` : ''}
+        ${d.details.gestureCtrl ? '<span class="badge badge-mint" style="font-size:10px">手勢控制</span>' : ''}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* ─── BUILD STICKY HEADER ─── */
+function buildStickyHeader() {
+  const grid = document.getElementById('sticky-grid');
+  // Set columns
+  grid.style.gridTemplateColumns = `180px repeat(${DRONES.length}, 1fr)`;
+  DRONES.forEach(d => {
+    const col = document.createElement('div');
+    col.className = 'sticky-drone-col';
+    col.style.borderLeft = `1px solid rgba(255,255,255,0.04)`;
+    col.innerHTML = `
+      ${makeImg(d, '', 'height:44px;max-width:80px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,212,255,0.25));transition:transform 0.3s cubic-bezier(0.25,1,0.5,1);')}
+      <div class="sticky-drone-name" style="color:${d.accentColor}">${d.name}</div>
+      <div class="sticky-drone-price">${d.price}</div>
+    `;
+    grid.appendChild(col);
+  });
+}
+
+/* ─── BUILD TABLE ─── */
+let activeTab = 'all';
+function buildTable(tab = 'all') {
+  activeTab = tab;
+  const tbody = document.getElementById('table-body');
+  const headerRow = document.getElementById('table-header-row');
+
+  // Build header
+  while (headerRow.children.length > 1) headerRow.removeChild(headerRow.lastChild);
+  DRONES.forEach((d, i) => {
+    const th = document.createElement('th');
+    th.style.cssText = `border-bottom:2px solid ${d.accentColor}44; padding: 16px 8px; border-left: 1px solid rgba(255,255,255,0.04); transition: background 0.2s;`;
+    th.innerHTML = `
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+        ${makeImg(d, '', `height:36px;max-width:70px;object-fit:contain;filter:drop-shadow(0 4px 12px ${d.accentColor}55);`)}
+        <span class="font-display tracking-wide text-base" style="color:${d.accentColor}">${d.name}</span>
+      </div>
+    `;
+    headerRow.appendChild(th);
+  });
+
+  // Build body
+  tbody.innerHTML = '';
+  const visibleRows = SPEC_ROWS.filter(r => !r.category || tab === 'all' || r.category === tab || r.group);
+
+  const state = Flip.getState(tbody);
+
+  visibleRows.forEach(row => {
+    if (row.group) {
+      const tr = document.createElement('tr');
+      tr.className = 'spec-group-row';
+      const td = document.createElement('td');
+      td.colSpan = DRONES.length + 1;
+      td.textContent = row.group;
+      tr.appendChild(td);
+      tbody.appendChild(tr);
+      return;
+    }
+
+    const tr = document.createElement('tr');
+    tr.dataset.key = row.key;
+
+    const tdLabel = document.createElement('td');
+    tdLabel.className = 'spec-label-col';
+    tdLabel.textContent = row.label;
+    tr.appendChild(tdLabel);
+
+    DRONES.forEach((d, i) => {
+      const td = document.createElement('td');
+      const val = row.format(d);
+      td.className = getCellClass(row.key, val, d);
+      if (i > 0) td.style.borderLeft = '1px solid rgba(255,255,255,0.04)';
+      // Icon formatting
+      if (val === '✓') { td.innerHTML = '<span class="icon-check text-base">✓</span>'; }
+      else if (val === '✗') { td.innerHTML = '<span class="icon-cross text-base">✗</span>'; }
+      else td.textContent = val;
+      tr.appendChild(td);
+    });
+
+    tbody.appendChild(tr);
+  });
+
+  // FLIP animate
+  Flip.from(state, {
+    duration: 0.4,
+    ease: 'power2.out',
+    stagger: 0.02,
+    absolute: true,
+  });
+}
+
+/* ─── INIT ─── */
+buildCards();
+buildStickyHeader();
+buildTable('all');
+
+/* ─── TAB SWITCHING ─── */
+document.getElementById('tab-nav').addEventListener('click', e => {
+  const btn = e.target.closest('.tab-btn');
+  if (!btn) return;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildTable(btn.dataset.tab);
+  // Animate rows in
+  gsap.from('#table-body tr', {
+    opacity: 0,
+    y: 12,
+    stagger: 0.03,
+    duration: 0.4,
+    ease: 'power2.out',
+    clearProps: 'all',
+  });
+});
+
+/* ─── STICKY HEADER SCROLL ─── */
+window.addEventListener('scroll', () => {
+  const sh = document.getElementById('sticky-header');
+  sh.classList.toggle('scrolled', window.scrollY > 80);
+}, { passive: true });
+
+/* ─── GSAP HERO ANIMATIONS ─── */
+const heroTl = gsap.timeline({ delay: 0.1 });
+heroTl
+  .from('#hero-badge', { opacity: 0, y: 30, duration: 0.7, ease: 'power3.out' })
+  .from('#hero-title', {
+    opacity: 0, y: 60, duration: 1, ease: 'power3.out',
+    clearProps: 'transform',
+  }, '-=0.3')
+  .from('#hero-sub', { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' }, '-=0.5')
+  .from('#hero-cta', { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' }, '-=0.4')
+  .from('#hero-strip', { opacity: 0, y: 10, duration: 0.5 }, '-=0.3');
+
+/* ─── SCROLLTRIGGER: reveal elements ─── */
+ScrollTrigger.batch('.reveal', {
+  onEnter: batch => {
+    gsap.to(batch, {
+      opacity: 1,
+      y: 0,
+      stagger: 0.1,
+      duration: 0.8,
+      ease: 'power3.out',
+      clearProps: 'transform',
+    });
+  },
+  start: 'top 88%',
+  once: true,
+});
+
+/* ─── SCROLLTRIGGER: stagger card entries ─── */
+ScrollTrigger.create({
+  trigger: '#drone-cards-grid',
+  start: 'top 85%',
+  once: true,
+  onEnter: () => {
+    gsap.from('.drone-card', {
+      opacity: 0,
+      y: 60,
+      scale: 0.94,
+      stagger: 0.08,
+      duration: 0.85,
+      ease: 'power3.out',
+      clearProps: 'transform,opacity,scale',
+    });
+  }
+});
+
+/* ─── SCROLLTRIGGER: score rings ─── */
+ScrollTrigger.create({
+  trigger: '#drone-cards-grid',
+  start: 'top 70%',
+  once: true,
+  onEnter: () => {
+    DRONES.forEach(d => {
+      SCORE_DIMS.forEach(dim => {
+        const el = document.querySelector(`.ring-${d.id}-${dim.key}`);
+        if (!el) return;
+        const offset = parseFloat(el.dataset.offset);
+        gsap.to(el, {
+          strokeDashoffset: offset,
+          duration: 1.4,
+          delay: Math.random() * 0.3,
+          ease: 'power3.out',
+        });
+      });
+    });
+  }
+});
+
+/* ─── SCROLLTRIGGER: table rows stagger ─── */
+ScrollTrigger.create({
+  trigger: '#spec-table',
+  start: 'top 80%',
+  once: true,
+  onEnter: () => {
+    gsap.from('#table-body tr', {
+      opacity: 0,
+      x: -20,
+      stagger: 0.03,
+      duration: 0.55,
+      ease: 'power2.out',
+      clearProps: 'all',
+    });
+  }
+});
+
+/* ─── CARD HOVER SPRING ─── */
+document.querySelectorAll('.drone-card').forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    gsap.to(card, {
+      y: -6, scale: 1.01,
+      duration: 0.45,
+      ease: 'cubic-bezier(0.25, 1, 0.5, 1)',
+    });
+  });
+  card.addEventListener('mouseleave', () => {
+    gsap.to(card, {
+      y: 0, scale: 1,
+      duration: 0.5,
+      ease: 'elastic.out(1, 0.5)',
+    });
+  });
+});
+
+/* ─── BUTTON SPRING ─── */
+document.querySelectorAll('.cta-btn, .tab-btn').forEach(btn => {
+  btn.addEventListener('mousedown', () => {
+    gsap.to(btn, { scale: 0.95, duration: 0.1, ease: 'power2.in' });
+  });
+  btn.addEventListener('mouseup', () => {
+    gsap.to(btn, { scale: 1, duration: 0.4, ease: 'elastic.out(1, 0.4)' });
+  });
+  btn.addEventListener('mouseleave', () => {
+    gsap.to(btn, { scale: 1, duration: 0.3, ease: 'power2.out' });
+  });
+});
+
+/* ─── IMAGE ERROR HANDLING (graceful SVG fallback) ─── */
+function buildFallbackSVG(d) {
+  const c = d.accentColor;
+  return `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 160' fill='none'>
+    <rect width='260' height='160' rx='12' fill='%230b1120'/>
+    <text x='130' y='60' text-anchor='middle' font-family='monospace' font-size='11' fill='${encodeURIComponent(c)}' opacity='0.5' letter-spacing='3'>${d.short}</text>
+    <!-- Body -->
+    <rect x='105' y='70' width='50' height='26' rx='5' fill='%231a2540' stroke='${encodeURIComponent(c)}' stroke-width='1.2' opacity='0.8'/>
+    <!-- Arms -->
+    <line x1='105' y1='76' x2='55' y2='48' stroke='%232a3a5a' stroke-width='3.5' stroke-linecap='round'/>
+    <line x1='155' y1='76' x2='205' y2='48' stroke='%232a3a5a' stroke-width='3.5' stroke-linecap='round'/>
+    <line x1='105' y1='90' x2='55' y2='118' stroke='%232a3a5a' stroke-width='3.5' stroke-linecap='round'/>
+    <line x1='155' y1='90' x2='205' y2='118' stroke='%232a3a5a' stroke-width='3.5' stroke-linecap='round'/>
+    <!-- Props -->
+    <ellipse cx='55' cy='44' rx='24' ry='5' fill='none' stroke='${encodeURIComponent(c)}' stroke-width='1.2' opacity='0.7'/>
+    <ellipse cx='205' cy='44' rx='24' ry='5' fill='none' stroke='${encodeURIComponent(c)}' stroke-width='1.2' opacity='0.7'/>
+    <ellipse cx='55' cy='122' rx='24' ry='5' fill='none' stroke='${encodeURIComponent(c)}' stroke-width='1.2' opacity='0.7'/>
+    <ellipse cx='205' cy='122' rx='24' ry='5' fill='none' stroke='${encodeURIComponent(c)}' stroke-width='1.2' opacity='0.7'/>
+    <!-- Camera -->
+    <circle cx='130' cy='83' r='7' fill='${encodeURIComponent(c)}' opacity='0.4'/>
+    <circle cx='130' cy='83' r='3.5' fill='${encodeURIComponent(c)}' opacity='0.7'/>
+    <text x='130' y='145' text-anchor='middle' font-family='monospace' font-size='9' fill='white' opacity='0.3'>${d.name}</text>
+  </svg>`;
+}
+
+// Apply fallback to all drone images
+setTimeout(() => {
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('error', function() {
+      const id = this.closest('[data-id]')?.dataset?.id;
+      if (id) {
+        const d = DRONES.find(x => x.id === id);
+        if (d) { this.src = buildFallbackSVG(d); this.onerror = null; }
+      }
+    });
+  });
+}, 100);
+
+/* ─── GPU HINTS ─── */
+document.querySelectorAll('.drone-card, .cta-btn, .tab-btn, .sticky-drone-col').forEach(el => {
+  el.style.willChange = 'transform';
+});
+</script>
 </body>
 </html>
